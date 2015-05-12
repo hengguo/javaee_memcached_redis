@@ -1,14 +1,15 @@
 package demo.jedis;
 
-import java.io.Serializable;
 
-public class User implements Serializable {
-
-	private static final long serialVersionUID = -1267719235225203410L;
+public class User {
 
 	private String uid;
 
+	private String name;
+	
 	private String address;
+	
+    public static final String OBJECT_KEY = "USER";  
 
 	public String getUid() {
 		return uid;
@@ -16,6 +17,14 @@ public class User implements Serializable {
 
 	public void setUid(String uid) {
 		this.uid = uid;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getAddress() {
@@ -26,9 +35,13 @@ public class User implements Serializable {
 		this.address = address;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public static String getObjectKey() {
+		return OBJECT_KEY;
 	}
-	
-	
+	public String getKey(){
+		return getUid();
+	}
+	public String toString() {  
+        return "User [id=" + uid + ", name=" + name + "]";  
+    } 
 }

@@ -8,9 +8,10 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<context:component-scan base-package="demo.*" />
-<!-- 	<aop:aspectj-autoproxy proxy-target-class="true" /> -->
-	<context:annotation-config />
+	<context:component-scan base-package="demo">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -21,8 +22,8 @@
 
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<property name="maxIdle" value="${redis.pool.maxIdle}" />
-		<property name="maxActive" value="${redis.pool.maxActive}" />
-		<property name="maxWait" value="${redis.pool.maxWait}" />
+		<!-- <property name="maxActive" value="${redis.pool.maxActive}" /> -->
+		<!-- <property name="maxWait" value="${redis.pool.maxWait}" /> -->
 		<property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />
 	</bean>
 
@@ -33,9 +34,13 @@
 		<property name="port" value="${redis.port}" />
 		<property name="timeout" value="1000" />
 		<property name="password" value="${redis.pass}" />
-		</bean>
+	</bean>
 
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="redisConnectionFactory" />
+	</bean>
+	
+	<bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
 		<property name="connectionFactory" ref="redisConnectionFactory" />
 	</bean>
 

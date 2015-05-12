@@ -7,7 +7,13 @@ import java.util.Properties;
 import org.junit.Test;
 
 import redis.clients.jedis.Jedis;
+import demo.jedis.service.UserService;
 
+/**
+ * 
+ * @author wanghengguo
+ *
+ */
 public class JedisTest {
 	static Jedis jedis = null;
 	static {
@@ -52,4 +58,12 @@ public class JedisTest {
 //		jedis.auth("gome1234");
 		System.out.println(jedis.hget("123", "xc"));
 	}
+	
+	@Test
+	public void testDel() throws IOException {
+		jedis.auth("123");
+		System.out.println(jedis.del("USER"));
+	}
+	
+	
 }

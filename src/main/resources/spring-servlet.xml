@@ -25,7 +25,7 @@
 	<mvc:view-controller path="/" view-name="forward:/index" />
 		
 	<!-- 开启controller注解支持 -->
-	<context:component-scan base-package="demo">
+	<context:component-scan base-package="demo.controller">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 		<!-- <context:exclude-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/> -->
